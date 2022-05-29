@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Medicamentos</title>
+    <!-- Importar o Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Importar o Font Awesome -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    
+</head>
+<body>
+   <table class="table table-striped">
+       <tr>
+           <th>ID</th>
+           <th>Nome comercial</th>
+           <th>Laboratório</th>
+           <th>Princípio ativo</th>
+           <th>Dose diária máxima</th>
+           <th>Forma farmacêutica</th>
+           <th>Concentração</th>
+           <th>Via de Administração</th>
+           <th>Grupo etário</th>
+           <th>Tarja</th>
+       </tr>
+
+       {% for medicamento in object_list %}
+       <tr>
+           <td>{{ medicamento.pk }}</td>
+           <td>{{ medicamento.nome_comercial }}</td>
+           <td>{{ medicamento.laboratorio }}</td>
+           <td>{{ medicamento.principio_ativo }}</td>
+           <td>{{ medicamento.dose_diaria_maxima }}</td>
+           <td>{{ medicamento.forma_farmaceutica }}</td>
+           <td>{{ medicamento.concentracao }}</td>
+           <td>{{ medicamento.via_administracao }}</td>
+           <td>{{ medicamento.grupo_etario }}</td>
+           <td>{{ medicamento.tarja }}</td>
+           <td>
+               <a href="{% url 'atualizar-medicamento' medicamento.pk %}" class="btn btn-warning btn-sm">Editar</a>
+               <a href="{% url 'excluir-medicamento' medicamento.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+           </td>
+       </tr>
+       {% empty %}
+       <tr>
+           <td colspan="100%">Nenhum medicamento cadastrado!</td>
+       </tr>
+       {% endfor %}
+   </table>
+
+    <!-- A ordem deve ser esta porque ele deve ler primeiro o jQuery -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

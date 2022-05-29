@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Doses e Tratamentos</title>
+    <!-- Importar o Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Importar o Font Awesome -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    
+</head>
+<body>
+   <table class="table table-striped">
+       <tr>
+           <th>ID</th>
+           <th>Alarme</th>
+           <th>Compartimento</th>
+           <th>Tempo de alerta</th>
+           <th>Status da Ingestão</th>
+           <th>Status da Sincronização</th>
+           <th>Status do Tratamento</th>
+       </tr>
+
+       {% for dose_tratamento in object_list %}
+       <tr>
+           <td>{{ dose_tratamento.pk }}</td>
+           <td>{{ dose_tratamento.alarme }}</td>
+           <td>{{ dose_tratamento.compartimento_caixa }}</td>
+           <td>{{ dose_tratamento.tempo_alerta_especifico }}</td>
+           <td>{{ dose_tratamento.status_ingestao }}</td>
+           <td>{{ dose_tratamento.status_sincronizacao }}</td>
+           <td>{{ dose_tratamento.status_tratamento }}</td>
+           <td>
+               <a href="{% url 'atualizar-doses-tratamento' dose_tratamento.pk %}" class="btn btn-warning btn-sm">Editar</a>
+               <a href="{% url 'excluir-doses-tratamento' dose_tratamento.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+           </td>
+       </tr>
+       {% empty %}
+       <tr>
+           <td colspan="100%">Nenhum profissional de saúde cadastrado!</td>
+       </tr>
+       {% endfor %}
+   </table>
+
+    <!-- A ordem deve ser esta porque ele deve ler primeiro o jQuery -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
