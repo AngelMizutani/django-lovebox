@@ -3,42 +3,49 @@ from .models import Medicamento, ProfissionalSaude, DosesTratamento, Cuidador, P
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class IndexView(TemplateView):
     template_name = "cadastros/index.html"
 
-class MedicamentoCreate(CreateView):
+class MedicamentoCreate(LoginRequiredMixin, CreateView):
     model = Medicamento
     fields = ['nome_comercial', 'laboratorio', 'principio_ativo', 'dose_diaria_maxima', 'forma_farmaceutica', 'concentracao', 'via_administracao', 'grupo_etario', 'tarja']
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-medicamentos')
+    # login_url = reverse_lazy('login')
 
-class ProfissionalSaudeCreate(CreateView):
+
+class ProfissionalSaudeCreate(LoginRequiredMixin, CreateView):
     model = ProfissionalSaude
     fields = ['nome', 'telefone', 'endereco', 'consultorio', 'email', 'redes_sociais', 'crc']
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-profissionais-saude')
 
-class DosesTratamentoCreate(CreateView):
+
+class DosesTratamentoCreate(LoginRequiredMixin, CreateView):
     model = DosesTratamento
     fields = ['alarme', 'compartimento_caixa', 'tempo_alerta_especifico', 'status_tratamento']
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-doses-tratamentos')
 
-class CuidadorCreate(CreateView):
+
+class CuidadorCreate(LoginRequiredMixin, CreateView):
     model = Cuidador
     fields = ['nome', 'telefone', 'crc', 'redes_sociais']
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-cuidadores')
 
-class PacienteCreate(CreateView):
+
+class PacienteCreate(LoginRequiredMixin, CreateView):
     model = Paciente
     fields = ['nome', 'telefone', 'data_nascimento', 'documento', 'cep', 'logradouro', 'numero', 'bairro', 'anamnese', 'redes_sociais', 'cuidador']
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-pacientes')
 
-class TratamentoCreate(CreateView):
+
+class TratamentoCreate(LoginRequiredMixin, CreateView):
     model = Tratamento
     fields = ['prescrito_por', 'data_prescricao', 'medicamento', 'frequencia_diaria', 'dose', 'unidade_medida', 'data_inicio', 'tipo_tratamento', 'periodo_tratamento', 'data_fim', 'observacao', 'lote', 'validade', 'embalagem_fracionavel', 'quantidade_total_embalagem', 'amostra_gratis', 'status_tratamento', 'paciente']
     template_name = 'cadastros/formulario.html'

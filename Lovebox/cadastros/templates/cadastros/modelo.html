@@ -11,8 +11,32 @@
     </head>
     <body>
         {% block menu %}
-        <div class="header">
-            menu
+        <div>
+            <!-- Início do menu à direita -->
+            <ul class="navbar-nav ml-auto">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            {{ request.user.username }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-key" aria-hidden="true"></i> Alterar senha</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'logout' %}">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                            Entrar
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
         {% endblock %}
 
