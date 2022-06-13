@@ -1,5 +1,0 @@
-- onde inserir os templates prontos? Vão todos na mesma pasta?
-
-- alterações em alguns campos da tabela tratamento -> boolean para charfield com choices
-
-- no crispy forms, não aparecem as opçoes nos campos booleanos (exemplo: cadastrar/tratamento -> embalagem fracionável e amostra grátis)

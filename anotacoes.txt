@@ -1,6 +1,0 @@
-28/05 - parei na parte de criar views para alterar, excluir e criar registros - pag 18 da apostila
-
-https://docs.google.com/document/d/13PMBiE3AwCjvp-iJ4obY8E1uPQcbIR3aUvbE2AAiVx8/edit?usp=sharing
-
-Diagrama de classes:
-https://lucid.app/lucidchart/9e5b86ac-127a-4bbc-b36d-b2d3d4a48e4c/edit?viewport_loc=240%2C-12%2C1652%2C821%2CHWEp-vi-RSFO&invitationId=inv_925633c0-3d59-452a-8a72-efd5b748ec02#
