@@ -16,6 +16,17 @@ class MedicamentoCreate(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('listar-medicamentos')
     # login_url = reverse_lazy('login')
 
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+
+        #valida os dadois do form antes de criar o objeto (não está no banco)
+        url = super().form_valid(form)
+
+        #nesse ponto, o objeto já foi inserido no banco de dados
+        print(self.object.usuario)
+        
+        return url
+
 
 class ProfissionalSaudeCreate(LoginRequiredMixin, CreateView):
     model = ProfissionalSaude

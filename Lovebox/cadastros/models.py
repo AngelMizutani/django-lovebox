@@ -1,6 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
+
+class Perfil(models.Model):
+    nome_completo = models.CharField(max_length=100)
+    cpf = models.CharField(max_length=14)
+    telefone = models.CharField(max_length=15)
+    usuario = models.OneToOneField(User, on_delete=models.PROTECT)
 
 class Medicamento(models.Model):
     nome_comercial = models.CharField(max_length=100)
@@ -12,6 +19,8 @@ class Medicamento(models.Model):
     via_administracao = models.CharField(max_length=50, verbose_name='Via de administração')
     grupo_etario = models.CharField(max_length=50, verbose_name='Grupo Etário')
     tarja = models.CharField(max_length=100)
+    
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return '{} - {}'.format(self.nome_comercial, self.concentracao)
