@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -69,6 +70,10 @@ class MedicamentoUpdate(UpdateView):
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-medicamentos')
 
+    def get_object(self):
+        self.object = get_object_or_404(Medicamento, usuario = self.request.user, pk = self.kwargs['pk'])
+        return self.object
+
 class ProfissionalSaudeUpdate(UpdateView):
     model = ProfissionalSaude
     fields = ['nome', 'telefone', 'endereco', 'consultorio', 'email', 'redes_sociais', 'crc']
@@ -105,6 +110,11 @@ class MedicamentoDelete(DeleteView):
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-medicamentos')
 
+    def get_object(self):
+        self.object = get_object_or_404(
+            Medicamento, usuario=self.request.user, pk=self.kwargs['pk'])
+        return self.object
+
 class ProfissionalSaudeDelete(DeleteView):
     model = ProfissionalSaude
     template_name = 'cadastros/form-excluir.html'
@@ -132,9 +142,15 @@ class TratamentoDelete(DeleteView):
 
 
 ##### LIST #########
-class MedicamentoList(ListView):
+class MedicamentoList(LoginRequiredMixin, ListView):
     model = Medicamento
     template_name = 'cadastros/listar-medicamentos.html'
+
+    def get_queryset(self):
+        self.object_list = Medicamento.objects.filter(usuario = self.request.user)
+
+        return self.object_list
+
 
 class ProfissionalSaudeList(ListView):
     model = ProfissionalSaude
