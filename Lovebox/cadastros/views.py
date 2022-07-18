@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 class IndexView(TemplateView):
     template_name = "cadastros/index.html"
 
+#não precisa usuário... consertar!!!!!
 class MedicamentoCreate(LoginRequiredMixin, CreateView):
     model = Medicamento
     fields = ['nome_comercial', 'laboratorio', 'principio_ativo', 'dose_diaria_maxima', 'forma_farmaceutica', 'concentracao', 'via_administracao', 'grupo_etario', 'tarja']
@@ -20,7 +21,7 @@ class MedicamentoCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.usuario = self.request.user
 
-        #valida os dadois do form antes de criar o objeto (não está no banco)
+        #valida os dados do form antes de criar o objeto (não está no banco)
         url = super().form_valid(form)
 
         #nesse ponto, o objeto já foi inserido no banco de dados
@@ -36,6 +37,7 @@ class ProfissionalSaudeCreate(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('listar-profissionais-saude')
 
 
+#essa classe vai precisar de um usuario relacionado a ela
 class DosesTratamentoCreate(LoginRequiredMixin, CreateView):
     model = DosesTratamento
     fields = ['alarme', 'compartimento_caixa', 'tempo_alerta_especifico', 'status_tratamento']
@@ -43,6 +45,7 @@ class DosesTratamentoCreate(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('listar-doses-tratamentos')
 
 
+#essa classe vai precisar de um usuario relacionado a ela
 class CuidadorCreate(LoginRequiredMixin, CreateView):
     model = Cuidador
     fields = ['nome', 'telefone', 'crc', 'redes_sociais']
@@ -50,13 +53,14 @@ class CuidadorCreate(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('listar-cuidadores')
 
 
+#essa classe vai precisar de um usuario relacionado a ela
 class PacienteCreate(LoginRequiredMixin, CreateView):
     model = Paciente
     fields = ['nome', 'telefone', 'data_nascimento', 'documento', 'cep', 'logradouro', 'numero', 'bairro', 'anamnese', 'redes_sociais', 'cuidador']
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-pacientes')
 
-
+#essa classe vai precisar de um usuario relacionado a ela
 class TratamentoCreate(LoginRequiredMixin, CreateView):
     model = Tratamento
     fields = ['prescrito_por', 'data_prescricao', 'medicamento', 'frequencia_diaria', 'dose', 'unidade_medida', 'data_inicio', 'tipo_tratamento', 'periodo_tratamento', 'data_fim', 'observacao', 'lote', 'validade', 'embalagem_fracionavel', 'quantidade_total_embalagem', 'amostra_gratis', 'status_tratamento', 'paciente']
