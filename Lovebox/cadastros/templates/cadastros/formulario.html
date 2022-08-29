@@ -14,15 +14,17 @@
     
 </head>
 <body>
-    <form method="POST">
-        {% csrf_token %}
+    <div class="p-4">
+        <form method="POST">
+            {% csrf_token %}
 
-        {{ form|crispy }}
+            {{ form|crispy }}
 
-        <button type="submit" class="btn btn-success">
-            Cadastrar
-        </button>
-    </form>
+            <button type="submit" class="btn btn-success">
+                Cadastrar
+            </button>
+        </form>
+    </div>
 
     <!-- A ordem deve ser esta porque ele deve ler primeiro o jQuery -->
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>

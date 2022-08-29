@@ -20,7 +20,7 @@ class Medicamento(models.Model):
     grupo_etario = models.CharField(max_length=50, verbose_name='Grupo Etário')
     tarja = models.CharField(max_length=100)
     
-    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+    #usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return '{} - {}'.format(self.nome_comercial, self.concentracao)

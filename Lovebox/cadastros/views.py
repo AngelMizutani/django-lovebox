@@ -150,10 +150,10 @@ class MedicamentoList(LoginRequiredMixin, ListView):
     model = Medicamento
     template_name = 'cadastros/listar-medicamentos.html'
 
-    def get_queryset(self):
-        self.object_list = Medicamento.objects.filter(usuario = self.request.user)
+    # def get_queryset(self):
+    #     self.object_list = Medicamento.objects.filter(usuario = self.request.user)
 
-        return self.object_list
+    #     return self.object_list
 
 
 class ProfissionalSaudeList(ListView):
