@@ -3,11 +3,11 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Perfil(models.Model):
-    nome_completo = models.CharField(max_length=100)
-    cpf = models.CharField(max_length=14)
-    telefone = models.CharField(max_length=15)
-    usuario = models.OneToOneField(User, on_delete=models.PROTECT)
+# class Perfil(models.Model):
+#     nome_completo = models.CharField(max_length=100)
+#     cpf = models.CharField(max_length=14)
+#     telefone = models.CharField(max_length=15)
+#     usuario = models.OneToOneField(User, on_delete=models.PROTECT)
 
 class Medicamento(models.Model):
     nome_comercial = models.CharField(max_length=100)
@@ -19,8 +19,6 @@ class Medicamento(models.Model):
     via_administracao = models.CharField(max_length=50, verbose_name='Via de administração')
     grupo_etario = models.CharField(max_length=50, verbose_name='Grupo Etário')
     tarja = models.CharField(max_length=100)
-    
-    #usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return '{} - {}'.format(self.nome_comercial, self.concentracao)
@@ -48,6 +46,8 @@ class DosesTratamento(models.Model):
     status_ingestao = models.BooleanField(verbose_name='Status da Ingestão', default=False)
     status_sincronizacao = models.BooleanField(verbose_name='Status da Sincronização', default=False)
     status_tratamento = models.CharField(max_length=50, choices=STATUS_TRATAMENTO, default='A')
+
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     
     def __str__(self):
         return '{} - {}'.format(self.alarme, self.compartimento_caixa)
@@ -57,6 +57,7 @@ class Cuidador(models.Model):
     telefone = models.CharField(max_length=50)
     crc = models.CharField(max_length=50, verbose_name='Conselho Regional de Classe', null=True, blank=True)
     redes_sociais = models.CharField(max_length=255, null=True, blank=True)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return '{} - {}'.format(self.nome, self.telefone)
@@ -73,6 +74,7 @@ class Paciente(models.Model):
     anamnese = models.TextField()
     redes_sociais = models.CharField(max_length=255, null=True, blank=True)
     cuidador = models.ForeignKey(Cuidador, on_delete=models.PROTECT)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return '{} - {}'.format(self.nome, self.telefone)
@@ -115,6 +117,7 @@ class Tratamento(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT)
     cadastrado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return '{} - {} - {}'.format(self.paciente.nome, self.medicamento.nome_comercial, self.horarios_diarios)

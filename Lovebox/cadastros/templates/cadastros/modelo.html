@@ -51,7 +51,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="#!">Meus dados</a></li>
-                    <li><a class="dropdown-item" href="#!">Alterar senha</a></li>
+                    <li><a class="dropdown-item" href="{% url 'alterar-senha' %}">Alterar senha</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
@@ -84,18 +84,90 @@
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            data-bs-target="#collapseLayoutsMed" aria-expanded="false" aria-controls="collapseLayoutsMed">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Cadastros
+                            Medicamentos
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                        <div class="collapse" id="collapseLayoutsMed" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{% url 'listar-tratamentos' %}">Tratamentos</a>
+                                <a class="nav-link" href="{% url 'listar-medicamentos' %}">Listar medicamentos</a>
+                                <a class="nav-link" href="{% url 'cadastrar-medicamento' %}">Cadastrar medicamentos</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayoutsProf" aria-expanded="false" aria-controls="collapseLayoutsProf">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Profissionais de Saúde
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayoutsProf" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'listar-profissionais-saude' %}">Listar Profissionais</a>
+                                <a class="nav-link" href="{% url 'cadastrar-profissional-saude' %}">Cadastrar Profissional</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayoutsCuidador" aria-expanded="false" aria-controls="collapseLayoutsCuidador">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Cuidador
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayoutsCuidador" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'listar-cuidadores' %}">Listar Cuidadores</a>
+                                <a class="nav-link" href="{% url 'cadastrar-cuidador' %}">Cadastrar Cuidador</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayoutsPac" aria-expanded="false" aria-controls="collapseLayoutsPac">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Paciente
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayoutsPac" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'listar-pacientes' %}">Listar Pacientes</a>
+                                <a class="nav-link" href="{% url 'cadastrar-paciente' %}">Cadastrar Paciente</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayoutsTrat" aria-expanded="false" aria-controls="collapseLayoutsTrat">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Tratamentos
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayoutsTrat" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'listar-tratamentos' %}">Listar tratamentos</a>
                                 <a class="nav-link" href="{% url 'cadastrar-tratamento' %}">Cadastrar tratamento</a>
                             </nav>
                         </div>
+                        
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayoutsDose" aria-expanded="false" aria-controls="collapseLayoutsDose">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Dose Tratamento
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayoutsDose" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'listar-doses-tratamentos' %}">Listar Doses</a>
+                                <a class="nav-link" href="{% url 'cadastrar-dose-tratamento' %}">Cadastrar Dose</a>
+                            </nav>
+                        </div>
+
+
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                             aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -114,9 +186,9 @@
                                 <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="login.html">Login</a>
-                                        <a class="nav-link" href="register.html">Register</a>
-                                        <a class="nav-link" href="password.html">Forgot Password</a>
+                                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                        <!-- <a class="nav-link" href="#">Register</a>
+                                        <a class="nav-link" href="#">Forgot Password</a> -->
                                     </nav>
                                 </div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
