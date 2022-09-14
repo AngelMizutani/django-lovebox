@@ -5,7 +5,23 @@
     <div class="container">
         <div class="row">
             <div class="col-sm pt-5">
-                <h3>Olá Lovebox!</h3>
+                {% if request.user.groups.all.0.name == "Administrador" %}
+                <h3>Olá Admin</h3>
+                {% else %}
+                <h3>Olá Usuário!</h3>
+                {% endif %}
+
+                {% for medicamento in ultimos_medicamentos %}
+                <div class="float-left m-2 p-3 medicamentos-list">
+                    <div class="">
+                        Medicamento: {{ medicamento.nome_comercial }} <br>
+                        Princípio ativo: {{ medicamento.principio_ativo }}<br>
+                        Laboratório: {{ medicamento.laboratorio }}
+                    </div>
+                </div>
+                {% empty %}
+                <span>Nenhum medicamento cadastrado</span>
+                {% endfor %}
             </div>
         </div>
     </div>

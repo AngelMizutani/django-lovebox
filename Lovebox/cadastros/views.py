@@ -11,6 +11,14 @@ from braces.views import GroupRequiredMixin
 class IndexView(TemplateView):
     template_name = "cadastros/index.html"
 
+class PaginaInicialView(TemplateView):
+    template_name = "index.html"
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['ultimos_medicamentos'] = Medicamento.objects.all().reverse()[0:10]
+        return context
+
 class MedicamentoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = u"Administrador"
@@ -267,3 +275,5 @@ class TratamentoList(LoginRequiredMixin, ListView):
     def get_queryset(self):
         self.object_list = Tratamento.objects.filter(usuario=self.request.user)
         return self.object_list
+
+

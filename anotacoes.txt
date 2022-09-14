@@ -6,3 +6,15 @@ senha: admin
 
 Usuario admin2
 senha: admin
+
+Usuario moana 
+senha: galinho123
+
+Usuario elsa 
+senha: lerigou13
+
+Usuario kitty
+senha: comida123
+
+Usuario teste
+senha: testando123

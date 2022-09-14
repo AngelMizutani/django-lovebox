@@ -1,5 +1,6 @@
 from django.urls import path, reverse_lazy
 from django.contrib.auth import views
+from .views import UsuarioCreate
 
 urlpatterns = [
     path('entrar/', views.LoginView.as_view(
@@ -12,4 +13,5 @@ urlpatterns = [
         extra_context={'titulo' : 'Alterar senha atual'},
         success_url=reverse_lazy('index')
     ), name="alterar-senha"),
+    path('registrar/', UsuarioCreate.as_view(), name='registrar')
 ]

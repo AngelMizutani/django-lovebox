@@ -111,6 +111,7 @@
                             </nav>
                         </div>
 
+                        {% if request.user.is_authenticated %}
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayoutsCuidador" aria-expanded="false" aria-controls="collapseLayoutsCuidador">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -166,7 +167,7 @@
                                 <a class="nav-link" href="{% url 'cadastrar-dose-tratamento' %}">Cadastrar Dose</a>
                             </nav>
                         </div>
-
+                        {% endif %}
 
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                             aria-expanded="false" aria-controls="collapsePages">
