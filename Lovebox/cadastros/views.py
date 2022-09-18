@@ -10,13 +10,10 @@ from braces.views import GroupRequiredMixin
 # Create your views here.
 class IndexView(TemplateView):
     template_name = "cadastros/index.html"
-
-class PaginaInicialView(TemplateView):
-    template_name = "index.html"
-    
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['ultimos_medicamentos'] = Medicamento.objects.all().reverse()[0:10]
+        print(context['ultimos_medicamentos'])
         return context
 
 class MedicamentoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
@@ -27,12 +24,22 @@ class MedicamentoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-medicamentos')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Cadastrar Medicamento"
+        return context
+
 class ProfissionalSaudeCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = ProfissionalSaude
     fields = ['nome', 'telefone', 'endereco', 'consultorio', 'email', 'redes_sociais', 'crc']
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-profissionais-saude')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Cadastrar Profissional de Saúde"
+        return context
 
 class DosesTratamentoCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
@@ -53,6 +60,11 @@ class DosesTratamentoCreate(LoginRequiredMixin, CreateView):
         
         return url
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Cadastrar Dose Tratamento"
+        return context
+
 
 class CuidadorCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
@@ -71,6 +83,11 @@ class CuidadorCreate(LoginRequiredMixin, CreateView):
         print(self.object.usuario)
         
         return url
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Cadastrar Cuidador"
+        return context
 
 
 class PacienteCreate(LoginRequiredMixin, CreateView):
@@ -91,6 +108,11 @@ class PacienteCreate(LoginRequiredMixin, CreateView):
         
         return url
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Cadastrar Paciente"
+        return context
+
 class TratamentoCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Tratamento
@@ -109,6 +131,11 @@ class TratamentoCreate(LoginRequiredMixin, CreateView):
         
         return url
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Cadastrar Tratamento"
+        return context
+
 ##### UPDATE#########
 class MedicamentoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
@@ -118,6 +145,11 @@ class MedicamentoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-medicamentos')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Editar Medicamento"
+        return context
+
 class ProfissionalSaudeUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = ProfissionalSaude
@@ -125,7 +157,10 @@ class ProfissionalSaudeUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-profissionais-saude')
 
-    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Editar Profissional de Saúde"
+        return context
 
 class DosesTratamentoUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
@@ -138,6 +173,11 @@ class DosesTratamentoUpdate(LoginRequiredMixin, UpdateView):
         self.object = get_object_or_404(DosesTratamento, pk=self.kwargs['pk'], usuario=self.request.user)
         return self.object
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Editar Dose Tratamento"
+        return context
+
 class CuidadorUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Cuidador
@@ -148,6 +188,11 @@ class CuidadorUpdate(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         self.object = get_object_or_404(Cuidador, pk=self.kwargs['pk'], usuario=self.request.user)
         return self.object
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Editar Cuidador"
+        return context
 
 class PacienteUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
@@ -160,6 +205,11 @@ class PacienteUpdate(LoginRequiredMixin, UpdateView):
         self.object = get_object_or_404(Paciente, pk=self.kwargs['pk'], usuario=self.request.user)
         return self.object
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Editar Paciente"
+        return context
+
 class TratamentoUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Tratamento
@@ -170,6 +220,11 @@ class TratamentoUpdate(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         self.object = get_object_or_404(Tratamento, pk=self.kwargs['pk'], usuario=self.request.user)
         return self.object
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Editar Tratamento"
+        return context
 
 ##### DELETE #########
 class MedicamentoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):

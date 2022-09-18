@@ -5,11 +5,15 @@
     <div class="container">
         <div class="row">
             <div class="col-sm pt-5">
+                
                 {% if request.user.groups.all.0.name == "Administrador" %}
                 <h3>Olá Admin</h3>
                 {% else %}
                 <h3>Olá Usuário!</h3>
                 {% endif %}
+
+                <br>
+                <h4>Últimos medicamentos cadastrados</h3>
 
                 {% for medicamento in ultimos_medicamentos %}
                 <div class="float-left m-2 p-3 medicamentos-list">

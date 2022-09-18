@@ -13,7 +13,7 @@
     
 </head>
 <body>
-   <table class="table table-striped">
+   <table class="table table-striped p-4">
        <tr>
            <th>ID</th>
            <th>Nome comercial</th>
@@ -39,10 +39,12 @@
            <td>{{ medicamento.via_administracao }}</td>
            <td>{{ medicamento.grupo_etario }}</td>
            <td>{{ medicamento.tarja }}</td>
+           {% if request.user.groups.all.0.name == "Administrador" %}
            <td>
                <a href="{% url 'atualizar-medicamento' medicamento.pk %}" class="btn btn-warning btn-sm">Editar</a>
                <a href="{% url 'excluir-medicamento' medicamento.pk %}" class="btn btn-danger btn-sm">Excluir</a>
            </td>
+           {% endif %}
        </tr>
        {% empty %}
        <tr>
