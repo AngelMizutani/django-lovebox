@@ -38,8 +38,45 @@
     </div>
 
     <!-- A ordem deve ser esta porque ele deve ler primeiro o jQuery -->
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/popper.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    {% block scripts %}
+    <script src="{% static 'js/jquery.mask.min.js' %}"></script>
+
+    <script>
+        $(document).ready(function(){
+            var SPMaskBehavior = function (val) {
+                return val.replace(/\D/g, '').length === 11 ? '(00) 0 0000-0000' : '(00) 0000-00009';
+            },
+                spOptions = {
+                    onKeyPress: function (val, e, field, options) {
+                        field.mask(SPMaskBehavior.apply({}, arguments), options);
+                    }
+                };
+
+            $('#id_telefone').mask(SPMaskBehavior, spOptions);
+            // $("#id_telefone").mask("(00) 0000-0000");
+            $("#id_documento").mask("000.000.000-00");
+            $("input[id*=data_]").mask("00/00/0000");
+            // $("#id_data_nascimento").mask("00/00/0000");
+
+            var crcMask = function (val) {
+                return val.replace(/\D/g, '').length === 6 ? '000.000' : '000.009';
+            },
+                crcOptions = {
+                    onKeyPress: function (val, e, field, options) {
+                        field.mask(crcMask.apply({}, arguments), options);
+                    }
+                };
+
+            $("#id_crc").mask(crcMask,crcOptions);
+
+        });
+
+        
+    </script>
+    {% endblock %}
 </body>
 </html>

@@ -1,3 +1,4 @@
+{% extends 'cadastros/modelo.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,6 +14,7 @@
     
 </head>
 <body>
+    {% block conteudo %}
    <table class="table table-striped p-4">
        <tr>
            <th>ID</th>
@@ -25,6 +27,7 @@
            <th>Via de Administração</th>
            <th>Grupo etário</th>
            <th>Tarja</th>
+            <th>Opções</th>
        </tr>
 
        {% for medicamento in object_list %}
@@ -53,9 +56,7 @@
        {% endfor %}
    </table>
 
-    <!-- A ordem deve ser esta porque ele deve ler primeiro o jQuery -->
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/popper.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% endblock %}
+
 </body>
 </html>
