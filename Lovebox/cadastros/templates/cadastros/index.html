@@ -29,4 +29,62 @@
             </div>
         </div>
     </div>
+
+    <hr>
+    
+    <button id="btn-teste1" class="btn btn-primary">Teste 1</button>
+
+    <button id="btn-teste2" class="btn btn-warning">Teste 2</button>
+
+    <button id="btn-teste3" class="btn btn-success">Teste 3</button>
+
+    <button id="btn-teste4" class="btn btn-secondary">Senha</button>
+    
+    <div class="div-teste1 p-3 my-3 bg-secondary">
+        Div teste 1
+    </div>
+
+    <div class="div-teste2 p-3 my-3 bg-warning" style="display: none;">
+        Div teste 2
+    </div>
+    
+    <input type="text" name="teste" id="input-teste" class="form-control" value="42">
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            // alert("Ok");
+
+            $("#btn-teste1").click(function(){
+                $(".div-teste2").hide();
+                $(".div-teste1").fadeIn();
+            });
+
+            $("#btn-teste2").click(function () {
+                $(".div-teste1").hide();
+                $(".div-teste2").removeClass('bg-success').addClass('bg-warning');
+                var valor = $("#input-teste").val();
+                $(".div-teste2").text(valor);
+
+                $(".div-teste2").fadeIn();
+            });
+
+            $("#btn-teste3").click(function () {
+                $(".div-teste2").removeClass('bg-warning').addClass('bg-success');
+            });
+
+            $("#btn-teste4").click(function (e) {
+                e.preventDefault();
+
+                var tipo = $("#input-teste").attr("type");
+
+                if(tipo === "password"){
+                    $("#input-teste").attr("type", "text");
+                } else {
+                    $("#input-teste").attr("type", "password");
+                }
+            });
+        });
+    </script>
 {% endblock %}
