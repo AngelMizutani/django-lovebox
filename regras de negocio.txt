@@ -1,0 +1,22 @@
+- cadastro de medicamento: só admin
+- cadastro de profissional de saúde: todos podem fazer
+- cadastro de paciente/cuidador: todos
+- cadastro de tratamento: todos
+- cadastro de dose tratamento: todos
+
+
+VISUALIZAÇÃO
+- medicamento: pode ser visto por todos
+- profissional de saude: pode ser visto por todos 
+- lista de pacientes:
+    - pode ser vista por todos os profissionais de saúde relacionados
+    - pode ser vista pelos cuidadores relacionados
+    - pode ser vista por quem fez o cadastro
+- lista de cuidadores:
+    - pode ser vista pelos pacientes relacionados
+    - pode ser vista pelos profissionais de saúde relacionados aos pacientes atendidos pelo cuidador
+    - pode ser vista por quem fez o cadastro
+- lista de tratamento/dose tratamento:
+    - pode ser vista pelos pacientes relacionados
+    - pode ser vista pelos profissionais de saude/cuidadores relacionados ao paciente que recebe o tratamento
+    - pode ser vista por quem fez o cadastro 
