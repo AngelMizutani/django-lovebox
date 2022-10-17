@@ -1,4 +1,6 @@
 {% load static %}
+{% load meus_filtros %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,7 +15,8 @@
     
 </head>
 <body>
-   <table class="table table-striped p-4">
+
+    <table class="table table-striped p-4">
        <tr>
            <th>ID</th>
            <th>Nome</th>
@@ -26,8 +29,8 @@
        <tr>
            <td>{{ cuidador.pk }}</td>
            <td>{{ cuidador.nome }}</td>
-           <td>{{ cuidador.telefone }}</td>
-           <td>{{ cuidador.crc }}</td>
+           <td>{{ cuidador.telefone|remover_texto:"(44)" }}</td>
+           <td>{% substituir cuidador.crc "-" "." %}</td>
            <td>{{ cuidador.redes_sociais }}</td>
            <td>
                <a href="{% url 'atualizar-cuidador' cuidador.pk %}" class="btn btn-warning btn-sm">Editar</a>

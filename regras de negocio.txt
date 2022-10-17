@@ -20,3 +20,8 @@ VISUALIZAÇÃO
     - pode ser vista pelos pacientes relacionados
     - pode ser vista pelos profissionais de saude/cuidadores relacionados ao paciente que recebe o tratamento
     - pode ser vista por quem fez o cadastro 
+
+
+*implementar um filtro 
+*implementar tag 
+*implementar jquery
