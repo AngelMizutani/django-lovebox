@@ -165,7 +165,7 @@ class ProfissionalSaudeUpdate(LoginRequiredMixin, UpdateView):
 class DosesTratamentoUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = DosesTratamento
-    fields = ['alarme', 'compartimento_caixa', 'tempo_alerta_especifico', 'status_tratamento']
+    fields = ['alarme', 'compartimento_caixa', 'tempo_alerta_especifico', 'status_ingestao', 'status_tratamento']
     template_name = 'cadastros/formulario.html'
     success_url = reverse_lazy('listar-doses-tratamentos')
 
@@ -301,7 +301,8 @@ class DosesTratamentoList(LoginRequiredMixin, ListView):
     template_name = 'cadastros/listar-doses-tratamentos.html'
 
     def get_queryset(self):
-        self.object_list = DosesTratamento.objects.filter(usuario=self.request.user)
+        # self.object_list = DosesTratamento.objects.filter(usuario=self.request.user)
+        self.object_list = DosesTratamento.objects.filter(usuario=self.request.user).select_related()
         return self.object_list
 
 class CuidadorList(LoginRequiredMixin, ListView):
@@ -310,7 +311,8 @@ class CuidadorList(LoginRequiredMixin, ListView):
     template_name = 'cadastros/listar-cuidadores.html'
 
     def get_queryset(self):
-        self.object_list = Cuidador.objects.filter(usuario=self.request.user)
+        # self.object_list = Cuidador.objects.filter(usuario=self.request.user)
+        self.object_list = Cuidador.objects.filter(usuario=self.request.user).select_related()
         return self.object_list
 
 class PacienteList(LoginRequiredMixin, ListView):
@@ -319,7 +321,8 @@ class PacienteList(LoginRequiredMixin, ListView):
     template_name = 'cadastros/listar-pacientes.html'
 
     def get_queryset(self):
-        self.object_list = Paciente.objects.filter(usuario=self.request.user)
+        # self.object_list = Paciente.objects.filter(usuario=self.request.user)
+        self.object_list = Paciente.objects.filter(usuario=self.request.user).select_related()
         return self.object_list
 
 class TratamentoList(LoginRequiredMixin, ListView):
@@ -328,7 +331,8 @@ class TratamentoList(LoginRequiredMixin, ListView):
     template_name = 'cadastros/listar-tratamentos.html'
 
     def get_queryset(self):
-        self.object_list = Tratamento.objects.filter(usuario=self.request.user)
+        # self.object_list = Tratamento.objects.filter(usuario=self.request.user)
+        self.object_list = Tratamento.objects.filter(usuario=self.request.user).select_related()
         return self.object_list
 
 

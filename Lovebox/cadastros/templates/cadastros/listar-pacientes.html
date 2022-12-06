@@ -1,18 +1,22 @@
+{% extends 'cadastros/modelo.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{% block titulo %}
     <title>Lista de Pacientes</title>
-    <!-- Importar o Bootstrap -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <!-- Importar o Font Awesome -->
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-    
-</head>
-<body>
+{% endblock %}
+
+{% block titulo_pagina %}
+    <h3>Lista de Pacientes</h3>
+{% endblock %}
+
+{% block midia_social %}
+    <div id="social-media" style="margin: 5px;">
+                        
+    </div>
+{% endblock %}
+
+{% block conteudo %}
+
    <table class="table table-striped p-4">
        <tr>
            <th>ID</th>
@@ -27,6 +31,7 @@
            <th>Anamnese</th>
            <th>Redes Sociais</th>
            <th>Cuidador</th>
+           <th>Opções</th>
        </tr>
 
        {% for paciente in object_list %}
@@ -55,9 +60,4 @@
        {% endfor %}
    </table>
 
-    <!-- A ordem deve ser esta porque ele deve ler primeiro o jQuery -->
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/popper.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-</body>
-</html>
+{% endblock %}

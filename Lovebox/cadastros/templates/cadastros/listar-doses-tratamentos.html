@@ -1,18 +1,22 @@
+{% extends 'cadastros/modelo.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Doses e Tratamentos</title>
-    <!-- Importar o Bootstrap -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <!-- Importar o Font Awesome -->
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-    
-</head>
-<body>
+{% load meus_filtros %}
+
+{% block titulo %}
+    <title>Lista de Doses Tratamentos</title>
+ {% endblock %}
+
+{% block titulo_pagina %}
+    <h3>Lista de Doses Tratamentos</h3>
+{% endblock %}
+
+{% block midia_social %}
+    <div id="social-media" style="margin: 5px;">
+                        
+        </div>
+{% endblock %}
+
+{% block conteudo %}
    <table class="table table-striped p-4">
        <tr>
            <th>ID</th>
@@ -22,6 +26,7 @@
            <th>Status da Ingestão</th>
            <th>Status da Sincronização</th>
            <th>Status do Tratamento</th>
+           <th>Opção</th>
        </tr>
 
        {% for dose_tratamento in object_list %}
@@ -30,7 +35,8 @@
            <td>{{ dose_tratamento.alarme }}</td>
            <td>{{ dose_tratamento.compartimento_caixa }}</td>
            <td>{{ dose_tratamento.tempo_alerta_especifico }}</td>
-           <td>{{ dose_tratamento.status_ingestao }}</td>
+           <!-- <td>{{ dose_tratamento.status_ingestao }}</td> -->
+           <td>{% definir_status_ingestao dose_tratamento.status_ingestao %}</td>
            <td>{{ dose_tratamento.status_sincronizacao }}</td>
            <td>{{ dose_tratamento.status_tratamento }}</td>
            <td>
@@ -45,9 +51,4 @@
        {% endfor %}
    </table>
 
-    <!-- A ordem deve ser esta porque ele deve ler primeiro o jQuery -->
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/popper.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-</body>
-</html>
+{% endblock %}

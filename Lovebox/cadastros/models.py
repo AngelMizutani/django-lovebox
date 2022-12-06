@@ -43,7 +43,7 @@ class DosesTratamento(models.Model):
     alarme = models.DateTimeField()
     compartimento_caixa = models.CharField(max_length=10, verbose_name='Compartimento')
     tempo_alerta_especifico = models.CharField(max_length=20, verbose_name='Tempo de alerta')
-    status_ingestao = models.BooleanField(verbose_name='Status da Ingestão', default=False)
+    status_ingestao = models.BooleanField(verbose_name='Medicamento ingerido?', default=False)
     status_sincronizacao = models.BooleanField(verbose_name='Status da Sincronização', default=False)
     status_tratamento = models.CharField(max_length=50, choices=STATUS_TRATAMENTO, default='A')
 

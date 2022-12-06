@@ -1,21 +1,24 @@
+{% extends 'cadastros/modelo.html' %}
 {% load static %}
 {% load meus_filtros %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Cuidadores</title>
-    <!-- Importar o Bootstrap -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <!-- Importar o Font Awesome -->
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-    
-</head>
-<body>
 
+    {% block titulo %}
+    <title>Lista de Cuidadores</title>
+    {% endblock %}
+
+    {% block titulo_pagina %}
+        <h3>Lista de Cuidadores</h3>
+    {% endblock %}
+
+    {% block midia_social %}
+        <div id="social-media" style="margin: 5px;">
+                        
+        </div>
+    {% endblock %}
+
+    {% block conteudo %}
+    <div>
     <table class="table table-striped p-4">
        <tr>
            <th>ID</th>
@@ -23,14 +26,15 @@
            <th>Telefone</th>
            <th>CRC</th>
            <th>Redes Sociais</th>
+           <th>Opções</th>
        </tr>
 
        {% for cuidador in object_list %}
        <tr>
            <td>{{ cuidador.pk }}</td>
            <td>{{ cuidador.nome }}</td>
-           <td>{{ cuidador.telefone|remover_texto:"(44)" }}</td>
-           <td>{% substituir cuidador.crc "-" "." %}</td>
+           <td>{{ cuidador.telefone }}</td>
+           <td>{{ cuidador.crc }}</td>
            <td>{{ cuidador.redes_sociais }}</td>
            <td>
                <a href="{% url 'atualizar-cuidador' cuidador.pk %}" class="btn btn-warning btn-sm">Editar</a>
@@ -44,9 +48,6 @@
        {% endfor %}
    </table>
 
-    <!-- A ordem deve ser esta porque ele deve ler primeiro o jQuery -->
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/popper.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-</body>
-</html>
+</div>
+
+    {% endblock %}

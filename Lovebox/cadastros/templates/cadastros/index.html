@@ -1,90 +1,119 @@
 {% extends 'cadastros/modelo.html' %}
 {% load static %}
 
+{% block titulo_pagina %}                   
+{% endblock %}
+
+{% block midia_social %}
+{% endblock %}
+
 {% block conteudo %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm pt-5">
-                
-                {% if request.user.groups.all.0.name == "Administrador" %}
-                <h3>Olá Admin</h3>
-                {% else %}
-                <h3>Olá Usuário!</h3>
-                {% endif %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm pt-5">
+                        
+                        {% if request.user.groups.all.0.name == "Administrador" %}
+                        <h3>Olá Admin</h3>
+                        {% else %}
+                        <h3>Olá Usuário!</h3>
+                        {% endif %}
 
-                <br>
-                <h4>Últimos medicamentos cadastrados</h3>
+                        <br>
+                        <h4>Últimos medicamentos cadastrados</h3>
 
-                {% for medicamento in ultimos_medicamentos %}
-                <div class="float-left m-2 p-3 medicamentos-list">
-                    <div class="">
-                        Medicamento: {{ medicamento.nome_comercial }} <br>
-                        Princípio ativo: {{ medicamento.principio_ativo }}<br>
-                        Laboratório: {{ medicamento.laboratorio }}
+                        <div id="btn-expandir" class="btn btn-primary">Expandir</div>
+                        <div id="btn-recolher" class="btn btn-secondary">Recolher</div>
+
+                        {% for medicamento in ultimos_medicamentos %}
+                        <div class="float-left m-2 p-3 medicamentos-list">
+                            
+                            <div id="" class="">
+                                <h5> {{ medicamento.nome_comercial }} </h5>
+                            </div>
+                            <div class="div-info-medicamento">
+                                Princípio ativo: {{ medicamento.principio_ativo }}<br>
+                                Laboratório: {{ medicamento.laboratorio }}
+                            </div>
+
+                            <hr>
+                        </div>
+                        {% empty %}
+                        <span>Nenhum medicamento cadastrado</span>
+                        {% endfor %}
                     </div>
                 </div>
-                {% empty %}
-                <span>Nenhum medicamento cadastrado</span>
-                {% endfor %}
             </div>
-        </div>
-    </div>
 
-    <hr>
-    
-    <button id="btn-teste1" class="btn btn-primary">Teste 1</button>
+            <!-- <hr>
+            
+            <button id="btn-teste1" class="btn btn-primary">Teste 1</button>
 
-    <button id="btn-teste2" class="btn btn-warning">Teste 2</button>
+            <button id="btn-teste2" class="btn btn-warning">Teste 2</button>
 
-    <button id="btn-teste3" class="btn btn-success">Teste 3</button>
+            <button id="btn-teste3" class="btn btn-success">Teste 3</button>
 
-    <button id="btn-teste4" class="btn btn-secondary">Senha</button>
-    
-    <div class="div-teste1 p-3 my-3 bg-secondary">
-        Div teste 1
-    </div>
+            <button id="btn-teste4" class="btn btn-secondary">Senha</button>
+            
+            <div class="div-teste1 p-3 my-3 bg-secondary">
+                Div teste 1
+            </div>
 
-    <div class="div-teste2 p-3 my-3 bg-warning" style="display: none;">
-        Div teste 2
-    </div>
-    
-    <input type="text" name="teste" id="input-teste" class="form-control" value="42">
+            <div class="div-teste2 p-3 my-3 bg-warning" style="display: none;">
+                Div teste 2
+            </div>
+            
+            <input type="text" name="teste" id="input-teste" class="form-control" value="42"> -->
 {% endblock %}
+ 
 
 {% block scripts %}
     <script>
         $(document).ready(function () {
             // alert("Ok");
+            $(".div-info-medicamento").hide();
+            $("#btn-recolher").hide();
 
-            $("#btn-teste1").click(function(){
-                $(".div-teste2").hide();
-                $(".div-teste1").fadeIn();
+            $("#btn-expandir").click(function(){
+                $(".div-info-medicamento").fadeIn();
+                $("#btn-expandir").hide();
+                $("#btn-recolher").show();
             });
 
-            $("#btn-teste2").click(function () {
-                $(".div-teste1").hide();
-                $(".div-teste2").removeClass('bg-success').addClass('bg-warning');
-                var valor = $("#input-teste").val();
-                $(".div-teste2").text(valor);
-
-                $(".div-teste2").fadeIn();
+            $("#btn-recolher").click(function(){
+                $(".div-info-medicamento").hide();
+                $("#btn-recolher").hide();
+                $("#btn-expandir").show();
             });
 
-            $("#btn-teste3").click(function () {
-                $(".div-teste2").removeClass('bg-warning').addClass('bg-success');
-            });
+            // $("#btn-teste1").click(function(){
+            //     $(".div-teste2").hide();
+            //     $(".div-teste1").fadeIn();
+            // });
 
-            $("#btn-teste4").click(function (e) {
-                e.preventDefault();
+            // $("#btn-teste2").click(function () {
+            //     $(".div-teste1").hide();
+            //     $(".div-teste2").removeClass('bg-success').addClass('bg-warning');
+            //     var valor = $("#input-teste").val();
+            //     $(".div-teste2").text(valor);
 
-                var tipo = $("#input-teste").attr("type");
+            //     $(".div-teste2").fadeIn();
+            // });
 
-                if(tipo === "password"){
-                    $("#input-teste").attr("type", "text");
-                } else {
-                    $("#input-teste").attr("type", "password");
-                }
-            });
+            // $("#btn-teste3").click(function () {
+            //     $(".div-teste2").removeClass('bg-warning').addClass('bg-success');
+            // });
+
+            // $("#btn-teste4").click(function (e) {
+            //     e.preventDefault();
+
+            //     var tipo = $("#input-teste").attr("type");
+
+            //     if(tipo === "password"){
+            //         $("#input-teste").attr("type", "text");
+            //     } else {
+            //         $("#input-teste").attr("type", "password");
+            //     }
+            // });
         });
     </script>
 {% endblock %}

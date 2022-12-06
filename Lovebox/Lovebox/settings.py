@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     
     'crispy_forms',
     'crispy_bootstrap5',
+    'jquery_ui',
+    'debug_toolbar',
 ]
 
 
@@ -57,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'Lovebox.urls'
@@ -139,3 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
